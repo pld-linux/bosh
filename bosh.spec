@@ -6,11 +6,11 @@ License:	GPL v2+
 Group:		Applications
 Source0:	http://dl.sourceforge.net/bosh/%{name}-%{version}.tar.gz
 # Source0-md5:	975ef183ed4d2314186b1f2705d57c65
+Patch0:		%{name}-ncurses.patch
 URL:		http://bosh.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	ncurses-devel
-BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -22,7 +22,7 @@ the contents of the currently selected line.
 
 %prep
 %setup -q
-%{__sed} -i 's@ncurses.h@ncurses/ncurses.h@' configure.in *.c
+%patch0 -p1
 
 %build
 %{__aclocal}
